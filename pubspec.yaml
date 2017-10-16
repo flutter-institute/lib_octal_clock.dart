@@ -2,6 +2,7 @@ name: octal_clock
 description: A dart library to manage converting from standard times to octal time
 version: 0.0.1
 author: Brian Armstrong <brian@flutter.institute>
+homepage: https://github.com/killermonk/lib_octal_clock.dart
 
 environment:
   sdk: '>=1.20.1 <2.0.0'
