@@ -1,4 +1,4 @@
-// Copyright (c) 2017, brianarmstrong. All rights reserved. Use of this source code
+// Copyright (c) 2017, Brian Armstrong. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:octal_clock/octal_clock.dart';
