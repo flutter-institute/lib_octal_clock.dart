@@ -27,7 +27,7 @@ class OctalDuration implements Comparable<OctalDuration> {
   static const int HOURS_PER_DAY = 24;
   static const int SCISMAS_PER_DAY = 3;
 
-  static const int HOURS_PER_SCISMAS = HOURS_PER_DAY ~/ SCISMAS_PER_DAY;
+  static const int HOURS_PER_SCISMA = HOURS_PER_DAY ~/ SCISMAS_PER_DAY;
 
   static const int MICROSECONDS_PER_SECOND =
       MICROSECONDS_PER_MILLISECOND * MILLISECONDS_PER_SECOND;

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+
+- Fixing typo in `HOURS_PER_SCISMA` constant
+
 ## 0.0.3
 
 - Adding a constants for `SCISMAS_PER_DAY` and `HOURS_PER_SCISMA`
