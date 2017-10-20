@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
+- Exporting the converter.dart util so it can be used by others
+
 ## 0.0.4
 
 - Fixing typo in `HOURS_PER_SCISMA` constant

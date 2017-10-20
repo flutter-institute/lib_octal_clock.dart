@@ -29,6 +29,7 @@ import 'dart:core';
 import 'package:octal_clock/exceptions.dart';
 import 'package:octal_clock/src/util/converter.dart';
 
-part 'src/octal_date_time.dart';
+export 'src/util/converter.dart';
 
+part 'src/octal_date_time.dart';
 part 'src/octal_duration.dart';
