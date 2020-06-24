@@ -26,8 +26,8 @@ library octal_clock;
 
 import 'dart:core';
 
-import 'package:octal_clock/exceptions.dart';
-import 'package:octal_clock/src/util/converter.dart';
+import 'exceptions.dart';
+import 'src/util/converter.dart';
 
 export 'src/util/converter.dart';
 

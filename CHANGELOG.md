@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0
+
+- Upgrading from dart2 compatibility
+- Renaming all the OctalDuration constants to match the Duration class (breaking change)
+
 ## 0.0.5
 
 - Exporting the converter.dart util so it can be used by others

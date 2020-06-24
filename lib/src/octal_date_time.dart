@@ -25,20 +25,20 @@ DateTime _octalPartsToDateTime(int year, int month, int day, int hour,
     int minute, int second, int millisecond, int microsecond,
     [bool isUtc = false]) {
   int octalMillis =
-      toDecimal(hour, 'hour') * OctalDuration.MILLISECONDS_PER_HOUR +
-          toDecimal(minute, 'minute') * OctalDuration.MILLISECONDS_PER_MINUTE +
-          toDecimal(second, 'second') * OctalDuration.MILLISECONDS_PER_SECOND +
+      toDecimal(hour, 'hour') * OctalDuration.millisecondsPerHour +
+          toDecimal(minute, 'minute') * OctalDuration.millisecondsPerMinute +
+          toDecimal(second, 'second') * OctalDuration.millisecondsPerSecond +
           toDecimal(millisecond, 'millisecond');
 
   int imperialMillis = (octalMillis / MILLISECONDS_RATIO).round();
-  int imperialHour = imperialMillis ~/ Duration.MILLISECONDS_PER_HOUR;
-  imperialMillis = imperialMillis.remainder(Duration.MILLISECONDS_PER_HOUR);
-  int imperialMinute = imperialMillis ~/ Duration.MILLISECONDS_PER_MINUTE;
-  imperialMillis = imperialMillis.remainder(Duration.MILLISECONDS_PER_MINUTE);
-  int imperialSecond = imperialMillis ~/ Duration.MILLISECONDS_PER_SECOND;
-  imperialMillis = imperialMillis.remainder(Duration.MILLISECONDS_PER_SECOND);
+  int imperialHour = imperialMillis ~/ Duration.millisecondsPerHour;
+  imperialMillis = imperialMillis.remainder(Duration.millisecondsPerHour).toInt();
+  int imperialMinute = imperialMillis ~/ Duration.millisecondsPerMinute;
+  imperialMillis = imperialMillis.remainder(Duration.millisecondsPerMinute).toInt();
+  int imperialSecond = imperialMillis ~/ Duration.millisecondsPerSecond;
+  imperialMillis = imperialMillis.remainder(Duration.millisecondsPerSecond).toInt();
   int imperialMicroseconds = (toDecimal(microsecond, 'microsecond',
-              OctalDuration.MICROSECONDS_PER_MILLISECOND) /
+              OctalDuration.microsecondsPerMillisecond) /
           MICROSECONDS_RATIO)
       .round();
 
@@ -93,9 +93,9 @@ class OctalDateTime implements Comparable<OctalDateTime> {
       : _date = dt,
         _millisFromEpoch =
             (dt.millisecondsSinceEpoch * MILLISECONDS_RATIO).round(),
-        _millis = ((dt.hour * Duration.MILLISECONDS_PER_HOUR +
-                    dt.minute * Duration.MILLISECONDS_PER_MINUTE +
-                    dt.second * Duration.MILLISECONDS_PER_SECOND +
+        _millis = ((dt.hour * Duration.millisecondsPerHour +
+                    dt.minute * Duration.millisecondsPerMinute +
+                    dt.second * Duration.millisecondsPerSecond +
                     dt.millisecond) *
                 MILLISECONDS_RATIO)
             .round() {
@@ -108,15 +108,15 @@ class OctalDateTime implements Comparable<OctalDateTime> {
     _microsecond = (_date.microsecond * MICROSECONDS_RATIO).round();
   }
 
-  static List<int> millisecondsToParts(milliseconds) {
-    int hours = milliseconds ~/ OctalDuration.MILLISECONDS_PER_HOUR;
-    milliseconds = milliseconds.remainder(OctalDuration.MILLISECONDS_PER_HOUR);
-    int minutes = milliseconds ~/ OctalDuration.MILLISECONDS_PER_MINUTE;
+  static List<int> millisecondsToParts(int milliseconds) {
+    int hours = milliseconds ~/ OctalDuration.millisecondsPerHour;
+    milliseconds = milliseconds.remainder(OctalDuration.millisecondsPerHour).toInt();
+    int minutes = milliseconds ~/ OctalDuration.millisecondsPerMinute;
     milliseconds =
-        milliseconds.remainder(OctalDuration.MILLISECONDS_PER_MINUTE);
-    int seconds = milliseconds ~/ OctalDuration.MILLISECONDS_PER_SECOND;
+        milliseconds.remainder(OctalDuration.millisecondsPerMinute).toInt();
+    int seconds = milliseconds ~/ OctalDuration.millisecondsPerSecond;
     milliseconds =
-        milliseconds.remainder(OctalDuration.MILLISECONDS_PER_SECOND);
+        milliseconds.remainder(OctalDuration.millisecondsPerSecond).toInt();
 
     return [hours, minutes, seconds, milliseconds];
   }
@@ -185,7 +185,7 @@ class OctalDateTime implements Comparable<OctalDateTime> {
   int get microsecond => dec2oct(_microsecond);
 
   int get microsecondsSinceEpoch =>
-      dec2oct(_millisFromEpoch * OctalDuration.MICROSECONDS_PER_MILLISECOND +
+      dec2oct(_millisFromEpoch * OctalDuration.microsecondsPerMillisecond +
           _microsecond);
 
   int get month => _date.month;
@@ -323,23 +323,23 @@ class OctalDateTime implements Comparable<OctalDateTime> {
         }
         return validOctal(result,
             type: 'milli/microsecond',
-            max: OctalDuration.MICROSECONDS_PER_SECOND);
+            max: OctalDuration.microsecondsPerSecond);
       }
 
       int year = int.parse(match[1]);
       int month = int.parse(match[2]);
       int day = int.parse(match[3]);
       int hour = validOctal(parseIntOrZero(match[4]),
-          type: 'hour', max: OctalDuration.HOURS_PER_DAY);
+          type: 'hour', max: OctalDuration.hoursPerDay);
       int minute = validOctal(parseIntOrZero(match[5]),
-          type: 'minute', max: OctalDuration.MINUTES_PER_HOUR);
+          type: 'minute', max: OctalDuration.minutesPerHour);
       int second = validOctal(parseIntOrZero(match[6]),
-          type: 'second', max: OctalDuration.SECONDS_PER_MINUTE);
+          type: 'second', max: OctalDuration.secondsPerMinute);
       int milliAndMicroseconds = oct2dec(parseMilliAndMicroseconds(match[7]));
       int millisecond = dec2oct(
-          milliAndMicroseconds ~/ OctalDuration.MICROSECONDS_PER_MILLISECOND);
+          milliAndMicroseconds ~/ OctalDuration.microsecondsPerMillisecond);
       int microsecond = dec2oct(milliAndMicroseconds
-          .remainder(OctalDuration.MICROSECONDS_PER_MILLISECOND));
+          .remainder(OctalDuration.microsecondsPerMillisecond).toInt());
       bool isUtc = false;
       if (match[8] != null) {
         // timezone part

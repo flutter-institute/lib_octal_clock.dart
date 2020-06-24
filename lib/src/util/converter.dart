@@ -7,15 +7,15 @@ import 'package:octal_clock/octal_clock.dart';
 // We will calculate our conversion ratio using milliseconds as our base unit.
 // This allows this library to work in js and dartvm without too much trouble.
 const MILLISECONDS_RATIO =
-    OctalDuration.MILLISECONDS_PER_HOUR / Duration.MILLISECONDS_PER_HOUR;
+    OctalDuration.millisecondsPerHour / Duration.millisecondsPerHour;
 
 // Since milliseconds is our base unit, we need are microsecond ratio so that
 // we can properly convert.
-const MICROSECONDS_RATIO = OctalDuration.MICROSECONDS_PER_MILLISECOND /
-    Duration.MICROSECONDS_PER_MILLISECOND;
+const MICROSECONDS_RATIO = OctalDuration.microsecondsPerMillisecond /
+    Duration.microsecondsPerMillisecond;
 
 int dec2oct(int decimal) {
-  int octal = 0;
+  num octal = 0;
   int multiplier = 0;
 
   bool neg = (decimal < 0);
@@ -30,13 +30,13 @@ int dec2oct(int decimal) {
     multiplier++;
   }
 
-  return neg ? -octal : octal;
+  return (neg ? -octal : octal).toInt();
 }
 
 int oct2dec(int octal) {
   final int original = octal;
 
-  int decimal = 0;
+  num decimal = 0;
   int multiplier = 0;
 
   bool neg = (octal < 0);
@@ -54,5 +54,5 @@ int oct2dec(int octal) {
     multiplier++;
   }
 
-  return neg ? -decimal : decimal;
+  return (neg ? -decimal : decimal).toInt();
 }
