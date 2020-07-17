@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0+1
+
+- Pub scoring updates
+- Adding dartdoc comments to every public member
+- Pedantic static analysis fixes
+- Converting all double quoted strings to single quotes
+- Removing unneeded `this` for accessing members
+- Removing unneeded `new` and `const` keywords
+- Properly adding `@override` annotations
+- Fixing default value assignment for OctalDuration from `:` to `=`
+- Removing unneeded type annotations for local variables
+
 ## 1.0.0
 
 - Upgrading from dart2 compatibility
