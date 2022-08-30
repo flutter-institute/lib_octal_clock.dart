@@ -27,16 +27,16 @@ A simple usage example:
     import 'package:octal_clock/octal_clock.dart';
     
     main() {
-      var octalDate = new OctalDateTime.now();
+      var octalDate = OctalDateTime.now();
       print('Octal Time: ${octalDate}');
     
       // Even though we're passing in an int, we treat it as if it were octal
-      var octalDuration = new OctalDuration(minutes: 74);
+      var octalDuration = OctalDuration(minutes: 74);
       var future = octalDate.add(octalDuration);
       print('The future: ${future}');
     
       var octalUtc = octalDate.toUtc();
-      var utcAsLocal = new OctalDateTime(
+      var utcAsLocal = OctalDateTime(
           octalUtc.year,
           octalUtc.month,
           octalUtc.day,
@@ -55,4 +55,4 @@ A simple usage example:
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: https://github.com/killermonk/lib_octal_clock.dart/issues
+[tracker]: https://github.com/flutter-institute/lib_octal_clock.dart/issues
