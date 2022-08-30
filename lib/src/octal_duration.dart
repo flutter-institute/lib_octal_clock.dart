@@ -132,7 +132,7 @@ class OctalDuration implements Comparable<OctalDuration> {
 
   /// Divide this octal duration by [quotient]
   OctalDuration operator ~/(int quotient) {
-    if (quotient == 0) throw IntegerDivisionByZeroException();
+    if (quotient == 0) throw UnsupportedError('Division by zero');
     return OctalDuration._microseconds(_duration ~/ quotient);
   }
 

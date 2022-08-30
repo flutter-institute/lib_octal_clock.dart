@@ -7,7 +7,7 @@ class InvalidOctalNumber implements Exception {
   const InvalidOctalNumber(this.number);
 
   /// Get the message for this exception
-  String get message => '${number} is not a valid octal number.';
+  String get message => '$number is not a valid octal number.';
 
   /// Get the message for this exception
   @override

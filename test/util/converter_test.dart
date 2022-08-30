@@ -5,10 +5,11 @@ import 'package:octal_clock/src/util/converter.dart';
 import 'package:octal_clock/exceptions.dart';
 import 'package:test/test.dart';
 
-const isInvalidOctalNumber = const _InvalidOctalNumber();
+const isInvalidOctalNumber = _InvalidOctalNumber();
 
-class _InvalidOctalNumber extends TypeMatcher {
-  const _InvalidOctalNumber() : super("InvalidOctalNumber");
+class _InvalidOctalNumber extends TypeMatcher<num> {
+  const _InvalidOctalNumber() : super();
+  @override
   bool matches(item, Map matchState) => item is InvalidOctalNumber;
 }
 
@@ -48,7 +49,7 @@ void main() {
       expect(dec2oct(4097), 10001);
       expect(dec2oct(-4097), -10001);
     });
-    
+
     test('converts octal to decimal', () {
       expect(oct2dec(0), 0);
       expect(oct2dec(-0), 0);
@@ -85,10 +86,11 @@ void main() {
     });
 
     test('errors when converting invalid octal numbers to decimal', () {
-      Matcher isInvalidOctalNumber(num) {
+      Matcher isInvalidOctalNumber(numberToTest) {
         return allOf(
-          predicate((e) => e is InvalidOctalNumber),
-          predicate((e) => e.message == '${num} is not a valid octal number.'),
+          predicate((dynamic e) => e is InvalidOctalNumber),
+          predicate((dynamic e) =>
+              e.message == '$numberToTest is not a valid octal number.'),
         );
       }
 

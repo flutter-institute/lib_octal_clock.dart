@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0
+
+- Null safety
+- Fixing a bunch of linter errors
+- Removing unneeded `new` and `const` keywords in tests
+- Properly adding `@override` annotations in tests
+
 ## 1.0.0+1
 
 - Pub scoring updates

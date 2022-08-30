@@ -12,7 +12,7 @@ part of octal_clock;
 /// [octal] the octal value to convert
 /// [type] a string describing this octal value, used for context in error messages
 /// [max] the maximum decimal value allowed
-int toDecimal(int octal, String type, [int max]) {
+int toDecimal(int octal, String type, [int? max]) {
   try {
     final decimal = oct2dec(octal);
     if (max != null && decimal > max) {
@@ -67,11 +67,11 @@ class OctalDateTime implements Comparable<OctalDateTime> {
   final int _millisFromEpoch;
   final int _millis;
 
-  int _hour;
-  int _minute;
-  int _second;
-  int _millisecond;
-  int _microsecond;
+  late int _hour;
+  late int _minute;
+  late int _second;
+  late int _millisecond;
+  late int _microsecond;
 
   /// Create a octal datetime from octal parts in the user's timezone
   OctalDateTime(int year,
@@ -267,14 +267,14 @@ class OctalDateTime implements Comparable<OctalDateTime> {
   }
 
   static String _threeDigits(int n) {
-    if (n >= 100) return '${n}';
-    if (n >= 10) return '0${n}';
-    return '00${n}';
+    if (n >= 100) return '$n';
+    if (n >= 10) return '0$n';
+    return '00$n';
   }
 
   static String _twoDigits(int n) {
-    if (n >= 10) return '${n}';
-    return '0${n}';
+    if (n >= 10) return '$n';
+    return '0$n';
   }
 
   /// Get the simple string representation of this octal datetime
@@ -340,12 +340,12 @@ class OctalDateTime implements Comparable<OctalDateTime> {
 
     final match = re.firstMatch(formattedString);
     if (match != null) {
-      int parseIntOrZero(String matched) {
+      int parseIntOrZero(String? matched) {
         if (matched == null) return 0;
         return int.parse(matched);
       }
 
-      int validOctal(int value, {int max, String type}) {
+      int validOctal(int value, {int? max, String? type}) {
         try {
           final decimal = oct2dec(value);
           if (max != null && decimal > max) {
@@ -360,7 +360,7 @@ class OctalDateTime implements Comparable<OctalDateTime> {
 
       // Parses fractional second digits of '.(\d{1,6})' into the combined
       // microseconds.
-      int parseMilliAndMicroseconds(String matched) {
+      int parseMilliAndMicroseconds(String? matched) {
         if (matched == null) return 0;
         final length = matched.length;
         assert(length >= 1);
@@ -378,9 +378,9 @@ class OctalDateTime implements Comparable<OctalDateTime> {
             max: OctalDuration.microsecondsPerSecond);
       }
 
-      final year = int.parse(match[1]);
-      final month = int.parse(match[2]);
-      final day = int.parse(match[3]);
+      final year = int.parse(match[1]!);
+      final month = int.parse(match[2]!);
+      final day = int.parse(match[3]!);
       final hour = validOctal(parseIntOrZero(match[4]),
           type: 'hour', max: OctalDuration.hoursPerDay);
       var minute = validOctal(parseIntOrZero(match[5]),
@@ -400,7 +400,7 @@ class OctalDateTime implements Comparable<OctalDateTime> {
         if (match[9] != null) {
           // timezone other than 'Z' and 'z'.
           final sign = (match[9] == '-') ? -1 : 1;
-          final hourDifference = int.parse(match[10]);
+          final hourDifference = int.parse(match[10]!);
           var minuteDifference = parseIntOrZero(match[11]);
           minuteDifference += 60 * hourDifference;
           minute -= sign * minuteDifference;

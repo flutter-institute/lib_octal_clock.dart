@@ -3,17 +3,17 @@
 
 import 'package:octal_clock/octal_clock.dart';
 
-main() {
-  var octalDate = new OctalDateTime.now();
-  print('Octal Time: ${octalDate}');
+void main() {
+  var octalDate = OctalDateTime.now();
+  print('Octal Time: $octalDate');
 
   // Even though we're passing in an int, we treat it as if it were octal
-  var octalDuration = new OctalDuration(minutes: 74);
+  var octalDuration = OctalDuration(minutes: 74);
   var future = octalDate.add(octalDuration);
-  print('The future: ${future}');
+  print('The future: $future');
 
   var octalUtc = octalDate.toUtc();
-  var utcAsLocal = new OctalDateTime(
+  var utcAsLocal = OctalDateTime(
       octalUtc.year,
       octalUtc.month,
       octalUtc.day,
@@ -25,5 +25,5 @@ main() {
 
   // Run this multiple time to observe the conversion errors
   var offset = utcAsLocal.difference(octalDate);
-  print('Octal UTC offset: ${offset}');
+  print('Octal UTC offset: $offset');
 }
