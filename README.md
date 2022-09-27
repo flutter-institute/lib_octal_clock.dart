@@ -1,5 +1,8 @@
 # octal_clock
 
+[![Codemagic build status](https://api.codemagic.io/apps/63336f980c4aeb133f6a4413/63336f980c4aeb133f6a4412/status_badge.svg)](https://codemagic.io/apps/63336f980c4aeb133f6a4413/63336f980c4aeb133f6a4412/latest_build)
+[![Pub Version](https://img.shields.io/pub/v/octal_clock)](https://pub.dev/packages/octal_clock)
+
 A dart library to manage converting from standard times to octal time.
 
 Octal time does away with the cumbersome 12-based imperial system of time keeping, where you can't count using only your fingers and everything is weird and awkward.
@@ -23,33 +26,34 @@ In the slightly modified words of Robert Owen, "\[1 Scisma]'s labour, \[1 Scisma
 ## Usage
 
 A simple usage example:
+```dart
+import 'package:octal_clock/octal_clock.dart';
 
-    import 'package:octal_clock/octal_clock.dart';
-    
-    main() {
-      var octalDate = OctalDateTime.now();
-      print('Octal Time: $octalDate');
-    
-      // Even though we're passing in an int, we treat it as if it were octal
-      var octalDuration = OctalDuration(minutes: 74);
-      var future = octalDate.add(octalDuration);
-      print('The future: $future');
-    
-      var octalUtc = octalDate.toUtc();
-      var utcAsLocal = OctalDateTime(
-          octalUtc.year,
-          octalUtc.month,
-          octalUtc.day,
-          octalUtc.hour,
-          octalUtc.minute,
-          octalUtc.second,
-          octalUtc.millisecond,
-          octalUtc.microsecond);
-    
-      // Run this multiple time to observe the conversion errors
-      var offset = utcAsLocal.difference(octalDate);
-      print('Octal UTC offset: $offset');
-    }
+main() {
+  var octalDate = OctalDateTime.now();
+  print('Octal Time: $octalDate');
+
+  // Even though we're passing in an int, we treat it as if it were octal
+  var octalDuration = OctalDuration(minutes: 74);
+  var future = octalDate.add(octalDuration);
+  print('The future: $future');
+
+  var octalUtc = octalDate.toUtc();
+  var utcAsLocal = OctalDateTime(
+      octalUtc.year,
+      octalUtc.month,
+      octalUtc.day,
+      octalUtc.hour,
+      octalUtc.minute,
+      octalUtc.second,
+      octalUtc.millisecond,
+      octalUtc.microsecond);
+
+  // Run this multiple time to observe the conversion errors
+  var offset = utcAsLocal.difference(octalDate);
+  print('Octal UTC offset: $offset');
+}
+```
 
 ## Features and bugs
 
