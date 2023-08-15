@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0
+
+- Updating Dart SDK to 3.0.0
+- Removing unused anlyzer options
+
 ## 2.0.0
 
 - Null safety
