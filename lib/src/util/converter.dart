@@ -6,13 +6,23 @@ import 'package:octal_clock/octal_clock.dart';
 /// The smallest unit where the two time systems synchronize is on the hour.
 /// We will calculate our conversion ratio using milliseconds as our base unit.
 /// This allows this library to work in js and dartvm without too much trouble.
-const MILLISECONDS_RATIO =
+const millisecondsRatio =
     OctalDuration.millisecondsPerHour / Duration.millisecondsPerHour;
+
+/// @deprecated Use [millisecondsRatio] instead.
+@Deprecated('Use [millisecondsRatio] instead.')
+// ignore: constant_identifier_names
+const MILLISECONDS_RATIO = millisecondsRatio;
 
 /// Since milliseconds is our base unit, we need are microsecond ratio so that
 /// we can properly convert.
-const MICROSECONDS_RATIO = OctalDuration.microsecondsPerMillisecond /
+const microsecondsRatio = OctalDuration.microsecondsPerMillisecond /
     Duration.microsecondsPerMillisecond;
+
+/// @deprecated Use [microsecondsRatio] instead.
+@Deprecated('Use [microsecondsRatio] instead.')
+// ignore: constant_identifier_names
+const MICROSECONDS_RATIO = microsecondsRatio;
 
 /// Convert a [decimal] number into its octal representation
 int dec2oct(int decimal) {

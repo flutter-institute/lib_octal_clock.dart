@@ -1,6 +1,6 @@
 name: octal_clock
 description: A dart library to manage converting from standard times to octal time
-version: 3.0.0
+version: 3.1.0
 homepage: https://github.com/flutter-institute/lib_octal_clock.dart
 repository: https://github.com/flutter-institute/lib_octal_clock.dart
 issue_tracker: https://github.com/flutter-institute/lib_octal_clock.dart/issues
@@ -9,5 +9,5 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dev_dependencies:
-  lint: ^2.0.0
+  lints: ^6.1.0
   test: ^1.15.1

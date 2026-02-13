@@ -4,7 +4,7 @@
 import 'package:octal_clock/octal_clock.dart';
 import 'package:test/test.dart';
 
-void _expectDate(odt, int year, int month, int day, int hour, int minute,
+void _expectDate(OctalDateTime odt, int year, int month, int day, int hour, int minute,
     int second, int millisecond, int microsecond, bool isUtc) {
   expect(odt.year, year, reason: 'year did not match');
   expect(odt.month, month, reason: 'month did not match');
@@ -17,6 +17,7 @@ void _expectDate(odt, int year, int month, int day, int hour, int minute,
   expect(odt.isUtc, isUtc, reason: 'isUtc did not match');
 }
 
+// ignore: strict_top_level_inference
 void _expectDuration(od, int days, int hours, int minutes, int seconds,
     int milliseconds, int microseconds) {
   expect(od.inDays, days, reason: 'days did not match');

@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.0
+
+- Updating to use `lints` instead of `lint` for the analyzer
+- Static analysis fixes
+- Deprecating MILLISECONDS_RATIO, use millisecondsRatio instead
+- Deprecating MICROSECONDS_RATIO, use microsecondsRatio instead
+
 ## 3.0.0
 
 - Updating Dart SDK to 3.0.0

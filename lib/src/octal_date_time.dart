@@ -6,7 +6,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-part of octal_clock;
+part of 'package:octal_clock/octal_clock.dart';
 
 /// Convert an octal value into a decimal value
 /// [octal] the octal value to convert
@@ -34,7 +34,7 @@ DateTime _octalPartsToDateTime(int year, int month, int day, int hour,
           toDecimal(second, 'second') * OctalDuration.millisecondsPerSecond +
           toDecimal(millisecond, 'millisecond');
 
-  var imperialMillis = (octalMillis / MILLISECONDS_RATIO).round();
+  var imperialMillis = (octalMillis / millisecondsRatio).round();
   final imperialHour = imperialMillis ~/ Duration.millisecondsPerHour;
   imperialMillis =
       imperialMillis.remainder(Duration.millisecondsPerHour).toInt();
@@ -46,7 +46,7 @@ DateTime _octalPartsToDateTime(int year, int month, int day, int hour,
       imperialMillis.remainder(Duration.millisecondsPerSecond).toInt();
   final imperialMicroseconds = (toDecimal(microsecond, 'microsecond',
               OctalDuration.microsecondsPerMillisecond) /
-          MICROSECONDS_RATIO)
+          microsecondsRatio)
       .round();
 
   DateTime imperialEquivalent;
@@ -104,12 +104,12 @@ class OctalDateTime implements Comparable<OctalDateTime> {
   OctalDateTime.fromDateTime(DateTime dt)
       : _date = dt,
         _millisFromEpoch =
-            (dt.millisecondsSinceEpoch * MILLISECONDS_RATIO).round(),
+            (dt.millisecondsSinceEpoch * millisecondsRatio).round(),
         _millis = ((dt.hour * Duration.millisecondsPerHour +
                     dt.minute * Duration.millisecondsPerMinute +
                     dt.second * Duration.millisecondsPerSecond +
                     dt.millisecond) *
-                MILLISECONDS_RATIO)
+                millisecondsRatio)
             .round() {
     final parts = millisecondsToParts(_millis);
     _hour = parts[0];
@@ -117,7 +117,7 @@ class OctalDateTime implements Comparable<OctalDateTime> {
     _second = parts[2];
     _millisecond = parts[3];
 
-    _microsecond = (_date.microsecond * MICROSECONDS_RATIO).round();
+    _microsecond = (_date.microsecond * microsecondsRatio).round();
   }
 
   /// Convert octal [milliseconds] into their larger parts
@@ -139,7 +139,7 @@ class OctalDateTime implements Comparable<OctalDateTime> {
   /// Convert this octal datetime into an imperial [DateTime]
   DateTime toDateTime() {
     return DateTime.fromMillisecondsSinceEpoch(
-        (_millisFromEpoch / MILLISECONDS_RATIO).round());
+        (_millisFromEpoch / millisecondsRatio).round());
   }
 
   /// Compare this octal datetime to [other]
@@ -154,7 +154,7 @@ class OctalDateTime implements Comparable<OctalDateTime> {
   /// Check if this octal datetime is equal to [other]
   @override
   bool operator ==(other) {
-    if (!(other is OctalDateTime)) return false;
+    if (other is! OctalDateTime) return false;
     return _date == other._date;
   }
 

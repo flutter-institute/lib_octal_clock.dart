@@ -6,7 +6,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-part of octal_clock;
+part of 'package:octal_clock/octal_clock.dart';
 
 int _imperialMicrosecondsToOctal(int imperialMicroseconds) {
   final millis = imperialMicroseconds ~/ Duration.microsecondsPerMillisecond;
@@ -15,9 +15,9 @@ int _imperialMicrosecondsToOctal(int imperialMicroseconds) {
       .toInt();
 
   // Milliseconds is our base unit, so use it as the main, then add the rest of the micros on
-  return (millis * MILLISECONDS_RATIO).round() *
+  return (millis * millisecondsRatio).round() *
           OctalDuration.microsecondsPerMillisecond +
-      (micros * MICROSECONDS_RATIO).round();
+      (micros * microsecondsRatio).round();
 }
 
 /// A class representing a duration in octal format
@@ -108,10 +108,10 @@ class OctalDuration implements Comparable<OctalDuration> {
   /// Convert this octal duration into its imperial [Duration] equivalent
   Duration toDuration() {
     final micros = _duration.remainder(microsecondsPerMillisecond).toInt();
-    final imperialMillis = (_milliseconds / MILLISECONDS_RATIO).round();
+    final imperialMillis = (_milliseconds / millisecondsRatio).round();
     final imperialMicros =
         imperialMillis * Duration.microsecondsPerMillisecond +
-            (micros * MICROSECONDS_RATIO).round();
+            (micros * microsecondsRatio).round();
     return Duration(microseconds: imperialMicros);
   }
 

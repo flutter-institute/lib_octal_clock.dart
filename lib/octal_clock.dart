@@ -20,7 +20,7 @@
 /// loss in accuracy due to the system rounding. Because there are almost
 /// two imperial microseconds per octal microsecond, and we do the conversion twice,
 /// the error is +/- 4 microseconds.
-library octal_clock;
+library;
 
 import 'dart:core';
 
